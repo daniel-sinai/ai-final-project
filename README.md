@@ -36,6 +36,7 @@ on various metrics like the number of backtracks, assignments, board validations
 You can watch the following video to get a better understanding of the project:<br>
 <video src="https://github.com/user-attachments/assets/88f69072-b688-4bbf-8f60-e451e40ac380" />
 
+
 ## Solvers Implemented
 The project implements the following Solvers:
 1. **Constraint Satisfaction Problem (CSP)** Solvers
