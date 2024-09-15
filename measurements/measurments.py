@@ -1,4 +1,3 @@
-import copy
 import datetime
 import os
 import statistics
@@ -22,21 +21,6 @@ GRAPHS_DIR_PATH = "graphs"
 MAX_TIMEOUTS_IN_A_ROW = 10
 
 
-def pretty_print_board(size, cages, operations):
-    cages = copy.deepcopy(cages)
-    board = [[f"X{row*size + col}" for col in range(size)] for row in range(size)]
-    for cage in cages:
-        for i, loc in enumerate(cage):
-            index = loc[0] * len(board) + loc[1]
-            cage[i] = f"X{index}"
-    string = ""
-    for row in board:
-        string += str(row) + "\n"
-    string += str(cages) + "\n"
-    string += str(operations) + "\n"
-    return string
-
-
 def _init_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
@@ -47,8 +31,6 @@ def _init_logger(name):
 
 MEASUREMENTS_LOGGER = _init_logger('MEASUREMENTS_LOGGER')
 MEASUREMENTS_LOGGER.disabled = False
-TIME_MEASUREMENTS_LOGGER = _init_logger('TIME_MEASUREMENTS_LOGGER')
-TIME_MEASUREMENTS_LOGGER.disabled = False
 
 
 class Measurements:
@@ -165,7 +147,6 @@ class TimeMeasurements:
             self.lock.release()
             game = CalcudokuGenerator().generate(size)
             board_manager = BoardManager(size, game.cages, game.operations)
-            TIME_MEASUREMENTS_LOGGER.info(f"starting board:\n {pretty_print_board(size, game.cages, game.operations)}")
             semaphore.acquire()
             t = threading.Thread(target=self._run_solver, args=(board_manager, semaphore, i, timeout_seconds))
             t.start()
