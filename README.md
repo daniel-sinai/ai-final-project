@@ -33,7 +33,9 @@ The goal of this project is to solve Calcudoku puzzles using various AI techniqu
 Constraint Satisfaction Problem (CSP) solvers, Genetic Algorithms, and Local Search methods.
 Each method has its strengths, and this project provides an analysis of their performance based
 on various metrics like the number of backtracks, assignments, board validations and success rate.
-You can watch the following video to get a better understanding of the project:<br>
+We also created a nice video that explains about our project. You can watch the full video here:<br>
+https://drive.google.com/file/d/1QEGgfaFOlH7ukU0dRSTZkQwUzWPfFkpo/view?usp=sharing <br>
+And you can get a preview of how it looks like:<br>
 <video src="https://github.com/user-attachments/assets/88f69072-b688-4bbf-8f60-e451e40ac380" />
 
 ## Solvers Implemented
