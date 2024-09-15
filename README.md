@@ -34,7 +34,9 @@ Constraint Satisfaction Problem (CSP) solvers, Genetic Algorithms, and Local Sea
 Each method has its strengths, and this project provides an analysis of their performance based
 on various metrics like the number of backtracks, assignments, board validations and success rate.
 You can watch the following video to get a better understanding of the project:<br>
-<video width="960" height="540" controls><source src="assets/LocalSearchGeneticExample.mp4" type="video/mp4"></video>
+[LocalSearchGeneticExample.mp4](assets%2FLocalSearchGeneticExample.mp4)
+
+[//]: # (<video width="960" height="540" controls><source src="assets/LocalSearchGeneticExample.mp4" type="video/mp4"></video>)
 
 ## Solvers Implemented
 The project implements the following Solvers:
