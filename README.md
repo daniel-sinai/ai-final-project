@@ -146,10 +146,10 @@ It uses a depth-first search algorithm to explore the solution space and find a 
 The solver doesn't use any heuristics or constraint propagation techniques, making it the slowest solver among the implemented solvers.
 It simply assigns values to variables and backtracks when it reaches a dead-end, until it finds a valid solution.<br>
 For this reason, the DFS solver is used as a baseline to compare the performance of the other solvers.<br>
-For this measurement, the run time of the DFS solver is compared to the run time of the AC-MRV and Genetic Algorithm solvers,
-which are the best solvers in terms of run time among CSP and Local Search solvers.<br>
+For this measurement, the run time of the DFS solver is compared to the run time of the AC-FC-MRV and Genetic Algorithm solvers,
+which are the best solvers among CSP and Local Search solvers.<br>
 
-You can compare the average time taken by the DFS, AC-MRV, and Genetic Algorithm solvers to solve a multiple Calcudoku puzzles with the same size using the following command:
+You can compare the average time taken by the DFS, AC-FC-MRV, and Genetic Algorithm solvers to solve a multiple Calcudoku puzzles with the same size using the following command:
 ```bash
 python run.py baseline-compare [OPTIONS]
 ```
@@ -163,14 +163,14 @@ where `[OPTIONS]` are the options for the performance measurement. The available
 - `--mutation-rate`: The probability of mutation for each individual in the Genetic Algorithm. Default: 0.5.
 - `--population-size`: The size of the population for the Genetic Algorithm. Default: 10.
 
-For example, to compare the performance of the DFS, AC-MRV, and Genetic Algorithm
+For example, to compare the performance of the DFS, AC-FC-MRV, and Genetic Algorithm
 solvers on 200 4x4 Calcudoku puzzles with timeout of 30 seconds, plot a graph and the following
 parameters for the Genetic solver: 100 generations, 0.6 mutation rate, 2000 population size, use the following command:
 ```bash
 python run.py baseline-compare --size 4 --amount 200 --timeout 30 --generations 100 --mutation-rate 0.6 --population-size 2000 --graphs
 ````
 
-The program will generate a single graph for the performance metric of the DFS, AC-MRV, and Genetic Algorithm solvers on 4x4 Calcudoku puzzles:<br>
+The program will generate a single graph for the performance metric of the DFS, AC-FC-MRV, and Genetic Algorithm solvers on 4x4 Calcudoku puzzles:<br>
 <img alt="Baseline Performance Graph" height="233" src="assets/baseline_time_compare.png" title="Baseline Performance Graph" width="333"/>
 
 > **NOTICE:** The average time is taken over all boards that were solved successfully without timeout. If the solver fails to solve a board within the timeout, it is considered a failure.

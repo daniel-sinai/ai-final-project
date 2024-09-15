@@ -187,7 +187,7 @@ def handle_basic_dfs(args):
 
 
 def handle_baseline_compare(args):
-    run_type_msg = f"""Running time comparison of AC-MRV and Genetic against DFS Baseline 
+    run_type_msg = f"""Running time comparison of AC-FC-MRV and Genetic against DFS Baseline 
     with {args.amount} {args.size}X{args.size} generated boards"""
     pretty_print_headline(run_type_msg)
     measurements = BaselineMeasurements(args.size, args.amount)

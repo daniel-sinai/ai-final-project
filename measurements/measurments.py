@@ -650,7 +650,7 @@ class BaselineMeasurements:
             board_manager = BoardManager(self.size, cages, operations)
             self.boards.append(board_manager)
         self.dfs_times = []
-        self.ac_mrv_times = []
+        self.ac_fc_mrv_times = []
         self.genetic_times = []
 
     def start(self, plot, population_size, generations, mutation_rate, timeout):
@@ -660,8 +660,8 @@ class BaselineMeasurements:
             self._plot(timeout)
 
     def _run(self, population_size, generations, mutation_rate, timeout):
-        dfs_timeouts, ac_mrv_timeouts, genetic_timeouts = 0, 0, 0
-        should_run_dfs, should_run_ac_mrv, should_run_genetic = True, True, True
+        dfs_timeouts, ac_fc_mrv_timeouts, genetic_timeouts = 0, 0, 0
+        should_run_dfs, should_run_ac_fc_mrv, should_run_genetic = True, True, True
 
         for i in range(self.amount):
             if should_run_dfs:
@@ -678,20 +678,19 @@ class BaselineMeasurements:
                 if dfs_timeouts >= MAX_TIMEOUTS_IN_A_ROW:
                     should_run_dfs = False
 
-            if should_run_ac_mrv:
-                ac_mrv_time = self.measure_time(
-                    BacktrackingCSPSolver(self.boards[i], "mrv", "random", False,
-                                          True),
-                    "AC-MRV",
+            if should_run_ac_fc_mrv:
+                ac_fc_mrv_time = self.measure_time(
+                    BacktrackingCSPSolver(self.boards[i], "mrv", "random", True, True),
+                    "AC-FC-MRV",
                     i,
                     timeout)
-                self.ac_mrv_times.append(ac_mrv_time)
-                if not ac_mrv_time:
-                    ac_mrv_timeouts += 1
+                self.ac_fc_mrv_times.append(ac_fc_mrv_time)
+                if not ac_fc_mrv_time:
+                    ac_fc_mrv_timeouts += 1
                 else:
-                    ac_mrv_timeouts = 0
-                if ac_mrv_timeouts >= MAX_TIMEOUTS_IN_A_ROW:
-                    should_run_ac_mrv = False
+                    ac_fc_mrv_timeouts = 0
+                if ac_fc_mrv_timeouts >= MAX_TIMEOUTS_IN_A_ROW:
+                    should_run_ac_fc_mrv = False
 
             if should_run_genetic:
                 genetic_time = self.measure_time(
@@ -711,15 +710,15 @@ class BaselineMeasurements:
 
     def _print(self):
         dfs_reached_timeout = all(time is None for time in self.dfs_times)
-        ac_mrv_reached_timeout = all(time is None for time in self.ac_mrv_times)
+        ac_fc_mrv_reached_timeout = all(time is None for time in self.ac_fc_mrv_times)
         genetic_reached_timeout = all(time is None for time in self.genetic_times)
 
         print("DFS:")
         print(f"    - Average time: {statistics.mean([time for time in self.dfs_times if time is not None]) if not dfs_reached_timeout else 'N/A'}")
         print(f"    - Timeouts: {len([time for time in self.dfs_times if time is None]) if not dfs_reached_timeout else 'Reached Max Timeouts'}")
-        print("AC MRV:")
-        print(f"    - Average time: {statistics.mean([time for time in self.ac_mrv_times if time is not None]) if not ac_mrv_reached_timeout else 'N/A'}")
-        print(f"    - Timeouts: {len([time for time in self.ac_mrv_times if time is None]) if not ac_mrv_reached_timeout else 'Reached Max Timeouts'}")
+        print("AC FC MRV:")
+        print(f"    - Average time: {statistics.mean([time for time in self.ac_fc_mrv_times if time is not None]) if not ac_fc_mrv_reached_timeout else 'N/A'}")
+        print(f"    - Timeouts: {len([time for time in self.ac_fc_mrv_times if time is None]) if not ac_fc_mrv_reached_timeout else 'Reached Max Timeouts'}")
         print("Genetic:")
         print(f"    - Average time: {statistics.mean([time for time in self.genetic_times if time is not None]) if not genetic_reached_timeout else 'N/A'}")
         print(f"    - Timeouts: {len([time for time in self.genetic_times if time is None]) if not genetic_reached_timeout else 'Reached Max Timeouts'}")
@@ -741,15 +740,15 @@ class BaselineMeasurements:
             y=1.02, fontsize=14)
 
         dfs_reached_timeout = all(time is None for time in self.dfs_times)
-        ac_mrv_reached_timeout = all(time is None for time in self.ac_mrv_times)
+        ac_mrv_reached_timeout = all(time is None for time in self.ac_fc_mrv_times)
         genetic_reached_timeout = all(time is None for time in self.genetic_times)
 
         solvers_names_list = ["DFS - Timeout" if dfs_reached_timeout else "DFS",
-                              "AC MRV - Timeout" if ac_mrv_reached_timeout else "AC MRV",
+                              "AC-FC-MRV - Timeout" if ac_mrv_reached_timeout else "AC-FC-MRV",
                               "Genetic - Timeout" if genetic_reached_timeout else "Genetic"]
         avg_measurements = [
             statistics.mean([time for time in self.dfs_times if time is not None]) if not dfs_reached_timeout else 0,
-            statistics.mean([time for time in self.ac_mrv_times if time is not None]) if not ac_mrv_reached_timeout else 0,
+            statistics.mean([time for time in self.ac_fc_mrv_times if time is not None]) if not ac_mrv_reached_timeout else 0,
             statistics.mean([time for time in self.genetic_times if time is not None] if not genetic_reached_timeout else 0)
         ]
 
