@@ -1,5 +1,5 @@
-# Calcudoku Solver - AI Final Project 2024
-# By Daniel Sinai, Daniel Lavi and Ofek Moshe
+# Calcudoku Solver - AI Final Project 2024, Hebrew University of Jerusalem
+## By Daniel Sinai, Daniel Lavi and Ofek Moshe
 
 ## Table of Contents
 1. [Introduction](#introduction)
