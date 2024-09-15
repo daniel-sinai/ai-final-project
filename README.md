@@ -49,7 +49,9 @@ The project implements the following Solvers:
 2. **Local Search** solvers:
     - **Hill Climbing:** A basic local search algorithm that starts from a random solution and iteratively makes small changes to the solution, moving in the direction of improving the objective function (in this case, reducing conflicts in the Calcudoku board). It can get stuck in local optima.
     - **Genetic Algorithm (GA):** A population-based search algorithm inspired by the process of natural selection. It maintains a population of candidate solutions and evolves them over generations using genetic operators like selection, crossover, and mutation. It can explore a larger search space and escape local optima.
-
+3. **Baseline Solver:**
+    - **DFS Solver:** A simple depth-first search algorithm that explores the solution space by assigning values to variables and backtracking when it reaches a dead-end. It doesn't use any heuristics or improvement techniques, making it the slowest and simplest solver among the implemented solvers. It is primarily used as a baseline to compare the performance of the other solvers and to show the progress made by the more advanced solvers.
+   
 ## Key Features
 - **Flexible Puzzle Generation:** The project includes a Calcudoku puzzle generator that can create puzzles of varying sizes. 
 - **Performance Measurement:** For each solver, the project measures key performance metrics like the number of backtracks, assignments, and board validations. 
